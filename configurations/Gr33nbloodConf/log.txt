@@ -1,0 +1,9 @@
+Configurations generator script for the Professional Firmware
+Author: Miguel A. Risco Castillo (c) 2022
+
+-Process Gr33nbloodConf/Configuration.h
+-Process Gr33nbloodConf/Configuration_adv.h
+-Process Gr33nbloodConf/Version.h
+-Process Gr33nbloodConf/platformio.ini
+
+Configuration files correctly generated
