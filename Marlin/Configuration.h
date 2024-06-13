@@ -20,7 +20,7 @@
  *
  */
 #pragma once
-
+#define SERVO0_PIN                          PA1
 // Created by configs generator for Professional firmware
 // https://github.com/mriscoc/Ender3V2S1
 
@@ -1140,7 +1140,7 @@
   //#define ENDSTOPPULLUP_UMAX
   //#define ENDSTOPPULLUP_VMAX
   //#define ENDSTOPPULLUP_WMAX
-  //#define ENDSTOPPULLUP_ZMIN_PROBE
+  #define ENDSTOPPULLUP_ZMIN_PROBE
 #endif
 
 // Enable pulldown for all endstops to prevent a floating state
@@ -1176,7 +1176,7 @@
 #define X_MAX_ENDSTOP_HIT_STATE HIGH
 #define Y_MIN_ENDSTOP_HIT_STATE HIGH
 #define Y_MAX_ENDSTOP_HIT_STATE HIGH
-#define Z_MIN_ENDSTOP_HIT_STATE LOW  // Default is HIGH, needs to be LOW for a BQMPv2
+#define Z_MIN_ENDSTOP_HIT_STATE HIGH  // Default is HIGH, needs to be LOW for a BQMPv2
 #define Z_MAX_ENDSTOP_HIT_STATE HIGH
 #define I_MIN_ENDSTOP_HIT_STATE HIGH
 #define I_MAX_ENDSTOP_HIT_STATE HIGH
@@ -1238,7 +1238,7 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 93 }  // Ender Configs
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 140 }  // Ender Configs
 
 #define LIMITED_MAX_STEPS_EDITING
 #if ENABLED(LIMITED_MAX_STEPS_EDITING)
@@ -1351,7 +1351,7 @@
  * The probe replaces the Z-MIN endstop and is used for Z homing.
  * (Automatically enables USE_PROBE_FOR_Z_HOMING.)
  */
-#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN  // Probe connected to BLTouch port. Miguels BLT disables this, we need to REENABLE it to use the old Z-MIN endstop port (PA7)
+//#define Z_MIN_PROBE_USES_Z_MIN_ENDSTOP_PIN  // Probe connected to BLTouch port. Miguels BLT disables this, we need to REENABLE it to use the old Z-MIN endstop port (PA7)
 
 // Force the use of the probe for Z-axis homing
 //#define USE_PROBE_FOR_Z_HOMING
@@ -1369,7 +1369,7 @@
  *    - Normally-closed (NC) also connect to GND.
  *    - Normally-open (NO) also connect to 5V.
  */
-#define Z_MIN_PROBE_PIN PA7  // Defaults to disabled, specify the non-BLTport - PA7 is the traditional 422/427 z-min endstop port
+#define Z_MIN_PROBE_PIN PC14  // Defaults to disabled, specify the non-BLTport - PA7 is the traditional 422/427 z-min endstop port
 
 /**
  * Probe Type
@@ -1575,7 +1575,7 @@
  *     |    [-]    |
  *     O-- FRONT --+
  */
-#define NOZZLE_TO_PROBE_OFFSET { -41.5, -7, 0 }  // MRiscoC BLTouch offset for support: https://www.thingiverse.com/thing:4605354 (z-offset = -1.80 mm)
+#define NOZZLE_TO_PROBE_OFFSET { -54.3, -11.3, -1.3 }  // MRiscoC BLTouch offset for support: https://www.thingiverse.com/thing:4605354 (z-offset = -1.80 mm)
 
 // Enable and set to use a specific tool for probing. Disable to allow any tool.
 #define PROBING_TOOL 0
@@ -1629,7 +1629,7 @@
  */
 #define PROBE_ENABLE_DISABLE  // Needs to be enabled for the BQMPv2
 #if ENABLED(PROBE_ENABLE_DISABLE)
-  #define PROBE_ENABLE_PIN PB0   // Override the default pin here  // BQMPv2 uses the default BLT port to deploy. PB0 is that pin on the 422/427 boards
+  #define PROBE_ENABLE_PIN PA1   // Override the default pin here  // BQMPv2 uses the default BLT port to deploy. PB0 is that pin on the 422/427 boards
 #endif
 
 /**
@@ -2248,9 +2248,9 @@
 
 // Manually set the home position. Leave these undefined for automatic settings.
 // For DELTA this is the top-center of the Cartesian print volume.
-//#define MANUAL_X_HOME_POS 0
-//#define MANUAL_Y_HOME_POS 0
-//#define MANUAL_Z_HOME_POS 0
+#define MANUAL_X_HOME_POS -5
+#define MANUAL_Y_HOME_POS -7
+//#define MANUAL_Z_HOME_POS -0.3
 //#define MANUAL_I_HOME_POS 0
 //#define MANUAL_J_HOME_POS 0
 //#define MANUAL_K_HOME_POS 0
@@ -2265,7 +2265,7 @@
  * - Allows Z homing only when XY positions are known and trusted.
  * - If stepper drivers sleep, XY homing may be required again before Z homing.
  */
-#define Z_SAFE_HOMING  // MRiscoC Homing Z at center of bed
+//#define Z_SAFE_HOMING  // MRiscoC Homing Z at center of bed
 
 #if ENABLED(Z_SAFE_HOMING)
   #define Z_SAFE_HOMING_X_POINT X_CENTER  // (mm) X point for Z homing
@@ -3419,7 +3419,7 @@
     #define HAS_PROUI_MAXTEMP 1
   #endif
   #define HAS_CGCODE 1
-  #define DEF_PROBEZFIX 0
+  #define DEF_ZFIX 0
 #endif
 #if ENABLED(DWIN_LCD_PROUI)
   #if PROUI_EX
